@@ -79,10 +79,10 @@ DomoscioJS.GameplayUtil.util("get_review_progress", { student_id: id, knowledge_
 
 ## Deployment
 
-To deploy this on a live system, use the link bellow : 
+To deploy this on a live system, use the <script> tag bellow : 
 
 ```
-https://cdn.rawgit.com/Celumproject/domoscio_js/d2e3ec24/v1/domosciojs.js
+<script>https://cdn.rawgit.com/Celumproject/domoscio_js/d2e3ec24/v1/domosciojs.js</script>
 ```
 
 ## Versioning
