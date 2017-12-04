@@ -34,10 +34,12 @@ DomoscioJS.configuration = {
 }
 ```
 
-    preproduction : boolean
-    version : integer
-    client_id : integer
-    client_passphrase : string
+| Key  | Type |
+| ------------- | ------------- |
+| preproduction  | `boolean` |
+| version  | `integer` |
+| client_id  | `integer` |
+| client_passphrase  | `string` |
 
 ## Samples
 
@@ -77,7 +79,7 @@ DomoscioJS.GameplayUtil.util("get_review_progress", { student_id: id, knowledge_
 
 ## Deployment
 
-To deploy this on a live system, use the like bellow : 
+To deploy this on a live system, use the link bellow : 
 
 ```
 https://cdn.rawgit.com/Celumproject/domoscio_js/d2e3ec24/v1/domosciojs.js
