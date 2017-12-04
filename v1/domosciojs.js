@@ -1,6 +1,5 @@
 /* DomoscioJS v1.0 (Custom Build)
  * Dependencies : jQuery (https://jquery.com/)
- * Author: Matthieu Mugnier (matthieu.mugnier@domoscio.com) 
  * Build: https://domoscio.com/ | https://github.com/Celumproject/domoscio_js
  */
 
