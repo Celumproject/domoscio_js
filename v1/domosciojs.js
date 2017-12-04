@@ -259,6 +259,16 @@ let Event = {
         return this;
     }
 }.init();
+let Session = {
+    name: "Session",
+    child: {},
+    fetch,
+    init: function () {
+        this.child.parent = this;
+        delete this.init;
+        return this;
+    }
+}.init();
 let Content = {
     name: "Content",
     child: {},
@@ -310,6 +320,7 @@ DomoscioJS = {
     KnowledgeNodeStudent,
     KnowledgeNodeContent,
     Event,
+    Session,
     Content,
     GameplayUtil
 
