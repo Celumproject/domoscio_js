@@ -34,12 +34,12 @@ DomoscioJS.configuration = {
 }
 ```
 
-| Key  | Type |
-| ------------- | ------------- |
-| preproduction  | `boolean` |
-| version  | `integer` |
-| client_id  | `integer` |
-| client_passphrase  | `string` |
+| Key  | Type | Description |
+| ------------- | ------------- | ------------- |
+| preproduction  | `boolean` | true is for development (use the preproduction Domoscio API) and false for production |
+| version  | `integer` | the current version of Domoscio API with latest features is 2 |
+| client_id  | `integer` | this is your instance_id, required for access to your data |
+| client_passphrase  | `string` | client_passphrase is your secret key, this token is paired with your client_id |
 
 ## Samples
 
