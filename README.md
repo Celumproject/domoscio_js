@@ -87,7 +87,7 @@ To deploy this on a live system, use the <script> tag bellow :
 
 ## Versioning
 
-Currently v1.0.0
+Currently v1.0.1
 
 ## Authors
 

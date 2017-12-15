@@ -1,4 +1,4 @@
-/* DomoscioJS v1.0 (Custom Build)
+/* DomoscioJS v1.0.1 (Custom Build)
  * Dependencies : jQuery (https://jquery.com/)
  * Build: https://domoscio.com/ | https://github.com/Celumproject/domoscio_js
  */
@@ -89,6 +89,26 @@ function fetch(filters = {}) {
             crossDomain: true,
             complete: function (e, statut) {
                 result = JSON.parse(e.responseText);
+                var pages = Math.ceil((parseInt(e.getResponseHeader('total')) / parseInt(e.getResponseHeader('per-page'))));
+                if (pages >= 2) {
+                    for (var i = pages; i <= pages; i++) {
+                        console.log('okokk');
+                        $.ajax({
+                            headers: {
+                                'Authorization': 'Token token=' + token
+                            },
+                            method: "GET",
+                            url: url,
+                            data: data + "&page=" + i,
+                            async: false,
+                            dataType: "json",
+                            crossDomain: true,
+                            complete: function (e, statut) {
+                                result = result.concat(JSON.parse(e.responseText));
+                            }
+                        });
+                    }
+                }
             },
             error: function (e, statut) {
                 console.error("We're sorry, but something went wrong. (500)");
