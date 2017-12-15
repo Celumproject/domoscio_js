@@ -15,7 +15,7 @@ function errors(type = 'token') {
     var errors = "";
     switch (type) {
         case 'token':
-            errors = 'Invalid API Token'
+            errors = 'Invalid API Token';
             break;
         default:
             errors = 'Invalid API Token';
@@ -309,6 +309,16 @@ let GameplayUtil = {
         return this;
     }
 }.init();
+let RecommendationUtil = {
+    name: "RecommendationUtil",
+    child: {},
+    util,
+    init: function () {
+        this.child.parent = this;
+        delete this.init;
+        return this;
+    }
+}.init();
 
 //#######################################################//
 //######                DomoscioJS                 ######//
@@ -342,6 +352,7 @@ DomoscioJS = {
     Event,
     Session,
     Content,
-    GameplayUtil
+    GameplayUtil,
+    RecommendationUtil
 
 }
