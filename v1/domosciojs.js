@@ -91,8 +91,7 @@ function fetch(filters = {}) {
                 result = JSON.parse(e.responseText);
                 var pages = Math.ceil((parseInt(e.getResponseHeader('total')) / parseInt(e.getResponseHeader('per-page'))));
                 if (pages >= 2) {
-                    for (var i = pages; i <= pages; i++) {
-                        console.log('okokk');
+                    for (var i = 2; i <= pages; i++) {
                         $.ajax({
                             headers: {
                                 'Authorization': 'Token token=' + token
