@@ -309,6 +309,16 @@ let GameplayUtil = {
         return this;
     }
 }.init();
+let ReviewUtil = {
+    name: "ReviewUtil",
+    child: {},
+    util,
+    init: function () {
+        this.child.parent = this;
+        delete this.init;
+        return this;
+    }
+}.init();
 let RecommendationUtil = {
     name: "RecommendationUtil",
     child: {},
@@ -353,6 +363,7 @@ DomoscioJS = {
     Session,
     Content,
     GameplayUtil,
+    ReviewUtil,
     RecommendationUtil
 
 }
