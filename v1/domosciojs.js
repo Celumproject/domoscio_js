@@ -1,5 +1,6 @@
-/* DomoscioJS v1.0.1 (Custom Build)
+/* DomoscioJS v1.0.2 (Custom Build)
  * Dependencies : jQuery (https://jquery.com/)
+ * Minify with https://skalman.github.io/UglifyJS-online/
  * Build: https://domoscio.com/ | https://github.com/Celumproject/domoscio_js
  */
 

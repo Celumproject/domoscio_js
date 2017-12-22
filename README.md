@@ -19,7 +19,7 @@ DomoscioJS requires the jQuery Javascript library. Make sure to load jquery.js f
 Place the following <script>s near the end of your pages, right before the closing </body> tag, to enable them. jQuery must come first, then DomoscioJS, and then your script.
 
 ```
-<script src="https://rawgit.com/Celumproject/domoscio_js/master/v1/domosciojs.js"></script>
+<script src="https://rawgit.com/Celumproject/domoscio_js/master/v1/domosciojs.min.js"></script>
 ```
 
 Then you have to configure the DomoscioJS object like bellow with your credentials to access your enabled APIs. Refer to the API documentation for details:
@@ -82,12 +82,12 @@ DomoscioJS.GameplayUtil.util("get_review_progress", { student_id: id, knowledge_
 To deploy this on a live system, use the <script> tag bellow : 
 
 ```
-<script>https://cdn.rawgit.com/Celumproject/domoscio_js/d2e3ec24/v1/domosciojs.js</script>
+<script src="https://cdn.rawgit.com/Celumproject/domoscio_js/160e555c/v1/domosciojs.min.js"></script>
 ```
 
 ## Versioning
 
-Currently v1.0.1
+Currently v1.0.2
 
 ## Authors
 
