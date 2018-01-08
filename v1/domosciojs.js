@@ -27,7 +27,7 @@ function errors(type = 'token') {
 
 // Build http call
 function http_calls(ressource = "") {
-    var host_url = (DomoscioJS.configuration.preproduction == true ? (DomoscioJS.configuration.version > 1 ? "https://domoscio-stats-engine2-preprod.herokuapp.com" : "http://stats-engine.domoscio.com") : "http://localhost:3001/");
+    var host_url = (DomoscioJS.configuration.preproduction == true ? (DomoscioJS.configuration.version > 1 ? "http://adaptive-engine.domoscio.com" : "http://stats-engine.domoscio.com") : "http://localhost:3001/");
     var version = DomoscioJS.configuration.version;
     var instance = DomoscioJS.configuration.client_id;
     var token = DomoscioJS.authorization_token(DomoscioJS.configuration.client_passphrase);
