@@ -1,4 +1,4 @@
-/* DomoscioJS v1.0.2 (Custom Build)
+/* DomoscioJS v1.0.3 (Custom Build)
  * Dependencies : jQuery (https://jquery.com/)
  * Minify with https://skalman.github.io/UglifyJS-online/
  * Build: https://domoscio.com/ | https://github.com/Celumproject/domoscio_js
@@ -239,6 +239,26 @@ let Objective = {
         return this;
     }
 }.init();
+let ObjectiveStudent = {
+    name: "ObjectiveStudent",
+    child: {},
+    fetch, find, create,
+    init: function () {
+        this.child.parent = this;
+        delete this.init;
+        return this;
+    }
+}.init();
+let ObjectiveStudentAssessment = {
+    name: "ObjectiveStudentAssessment",
+    child: {},
+    fetch, find, create,
+    init: function () {
+        this.child.parent = this;
+        delete this.init;
+        return this;
+    }
+}.init();
 let KnowledgeNode = {
     name: "KnowledgeNode",
     child: {},
@@ -356,6 +376,8 @@ DomoscioJS = {
 
     Student,
     Objective,
+    ObjectiveStudent,
+    ObjectiveStudentAssessment,
     KnowledgeNode,
     KnowledgeNodeStudent,
     KnowledgeNodeContent,
