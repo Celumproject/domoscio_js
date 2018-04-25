@@ -184,7 +184,19 @@ function create(data = {}) {
             async: false,
             dataType: "json",
             crossDomain: true,
+            tryCount: 0,
+            retryLimit: 1,
             complete: function (e, statut) {
+                store_credentials(e);
+                if (e.status == (401 || 403)) {
+                    this.tryCount++;
+                    if (this.tryCount <= this.retryLimit) {
+                        //try again
+                        $.ajax(this);
+                        return;
+                    }
+                    return;
+                }
                 console.log(JSON.stringify(data));
                 result = JSON.parse(e.responseText);
             },
@@ -218,7 +230,19 @@ function util(route, filters = {}) {
             async: false,
             dataType: "json",
             crossDomain: true,
+            tryCount: 0,
+            retryLimit: 1,
             complete: function (e, statut) {
+                store_credentials(e);
+                if (e.status == (401 || 403)) {
+                    this.tryCount++;
+                    if (this.tryCount <= this.retryLimit) {
+                        //try again
+                        $.ajax(this);
+                        return;
+                    }
+                    return;
+                }
                 result = JSON.parse(e.responseText);
             },
             error: function (e, statut) {
@@ -423,20 +447,20 @@ DomoscioJS = {
         }
     }.init(),
 
-    Student,
-    Objective,
-    ObjectiveStudent,
-    ObjectiveStudentAssessment,
-    KnowledgeNode,
-    KnowledgeNodeStudent,
-    KnowledgeNodeContent,
-    Event,
-    Session,
-    Content,
-    Tag,
-    GameplayUtil,
-    ReviewUtil,
-    RecommendationUtil
+    // Student,
+    // Objective,
+    // ObjectiveStudent,
+    // ObjectiveStudentAssessment,
+    // KnowledgeNode,
+    // KnowledgeNodeStudent,
+    // KnowledgeNodeContent,
+    // Event,
+    // Session,
+    // Content,
+    // Tag,
+    // GameplayUtil,
+    // ReviewUtil,
+    // RecommendationUtil
 
 }
 
