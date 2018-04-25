@@ -104,9 +104,7 @@ function fetch(filters = {}) {
                 if (pages >= 2) {
                     for (var i = 2; i <= pages; i++) {
                         $.ajax({
-                            headers: {
-                                'Authorization': 'Token token=' + token
-                            },
+                            headers: DomoscioJS.AuthorizationToken.request_headers(),
                             method: "GET",
                             url: url,
                             data: data + "&page=" + i,
@@ -139,15 +137,25 @@ function find(filters = {}) {
         if (url !== false) {
             var result = "";
             $.ajax({
-                headers: {
-                    'Authorization': 'Token token=' + token
-                },
+                headers: DomoscioJS.AuthorizationToken.request_headers(),
                 method: "GET",
                 url: url,
                 async: false,
                 dataType: "json",
                 crossDomain: true,
+                tryCount: 0,
+                retryLimit: 1,
                 complete: function (e, statut) {
+                    store_credentials(e);
+                    if (e.status == (401 || 403)) {
+                        this.tryCount++;
+                        if (this.tryCount <= this.retryLimit) {
+                            //try again
+                            $.ajax(this);
+                            return;
+                        }
+                        return;
+                    }
                     result = JSON.parse(e.responseText);
                 },
                 error: function (e, statut) {
@@ -169,9 +177,7 @@ function create(data = {}) {
     if (url !== false) {
         var result = "";
         $.ajax({
-            headers: {
-                'Authorization': 'Token token=' + token
-            },
+            headers: DomoscioJS.AuthorizationToken.request_headers(),
             method: "POST",
             url: url,
             data: data,
@@ -205,9 +211,7 @@ function util(route, filters = {}) {
         });
         var result = "";
         $.ajax({
-            headers: {
-                'Authorization': 'Token token=' + token
-            },
+            headers: DomoscioJS.AuthorizationToken.request_headers(),
             method: "GET",
             url: url,
             data: data,
@@ -224,151 +228,6 @@ function util(route, filters = {}) {
         return result;
     }
 };
-
-//#######################################################//
-//######                    LIB                    ######//
-//#######################################################//
-
-let Student = {
-    name: "Student",
-    child: {},
-    fetch, find, create,
-    init: function () {
-        this.child.parent = this;
-        delete this.init;
-        return this;
-    }
-}.init();
-let Objective = {
-    name: "Objective",
-    child: {},
-    fetch, find, create,
-    init: function () {
-        this.child.parent = this;
-        delete this.init;
-        return this;
-    }
-}.init();
-let ObjectiveStudent = {
-    name: "ObjectiveStudent",
-    child: {},
-    fetch, find, create,
-    init: function () {
-        this.child.parent = this;
-        delete this.init;
-        return this;
-    }
-}.init();
-let ObjectiveStudentAssessment = {
-    name: "ObjectiveStudentAssessment",
-    child: {},
-    fetch, find, create,
-    init: function () {
-        this.child.parent = this;
-        delete this.init;
-        return this;
-    }
-}.init();
-let KnowledgeNode = {
-    name: "KnowledgeNode",
-    child: {},
-    fetch, find, create,
-    init: function () {
-        this.child.parent = this;
-        delete this.init;
-        return this;
-    }
-}.init();
-let KnowledgeNodeStudent = {
-    name: "KnowledgeNodeStudent",
-    child: {},
-    fetch, find, create,
-    init: function () {
-        this.child.parent = this;
-        delete this.init;
-        return this;
-    }
-}.init();
-let KnowledgeNodeContent = {
-    name: "KnowledgeNodeContent",
-    child: {},
-    fetch, find, create,
-    init: function () {
-        this.child.parent = this;
-        delete this.init;
-        return this;
-    }
-}.init();
-let Event = {
-    name: "Event",
-    child: {},
-    fetch, find, create,
-    init: function () {
-        this.child.parent = this;
-        delete this.init;
-        return this;
-    }
-}.init();
-let Session = {
-    name: "Session",
-    child: {},
-    fetch,
-    init: function () {
-        this.child.parent = this;
-        delete this.init;
-        return this;
-    }
-}.init();
-let Content = {
-    name: "Content",
-    child: {},
-    fetch, find, create,
-    init: function () {
-        this.child.parent = this;
-        delete this.init;
-        return this;
-    }
-}.init();
-let Tag = {
-    name: "Tag",
-    child: {},
-    fetch, find, create,
-    init: function () {
-        this.child.parent = this;
-        delete this.init;
-        return this;
-    }
-}.init();
-let GameplayUtil = {
-    name: "GameplayUtil",
-    child: {},
-    util,
-    init: function () {
-        this.child.parent = this;
-        delete this.init;
-        return this;
-    }
-}.init();
-let ReviewUtil = {
-    name: "ReviewUtil",
-    child: {},
-    util,
-    init: function () {
-        this.child.parent = this;
-        delete this.init;
-        return this;
-    }
-}.init();
-let RecommendationUtil = {
-    name: "RecommendationUtil",
-    child: {},
-    util,
-    init: function () {
-        this.child.parent = this;
-        delete this.init;
-        return this;
-    }
-}.init();
 
 //#######################################################//
 //######                DomoscioJS                 ######//
@@ -398,6 +257,171 @@ DomoscioJS = {
     "AuthorizationToken": {
         token: "",
     },
+
+    //#######################################################//
+    //######                    LIB                    ######//
+    //#######################################################//
+
+    "Student": {
+        name: "Student",
+        child: {},
+        fetch,
+        find,
+        create,
+        init: function () {
+            this.child.parent = this;
+            delete this.init;
+            return this;
+        }
+    }.init(),
+    "Objective": {
+        name: "Objective",
+        child: {},
+        fetch,
+        find,
+        create,
+        init: function () {
+            this.child.parent = this;
+            delete this.init;
+            return this;
+        }
+    }.init(),
+    "ObjectiveStudent": {
+        name: "ObjectiveStudent",
+        child: {},
+        fetch,
+        find,
+        create,
+        init: function () {
+            this.child.parent = this;
+            delete this.init;
+            return this;
+        }
+    }.init(),
+    "ObjectiveStudentAssessment": {
+        name: "ObjectiveStudentAssessment",
+        child: {},
+        fetch,
+        find,
+        create,
+        init: function () {
+            this.child.parent = this;
+            delete this.init;
+            return this;
+        }
+    }.init(),
+    "KnowledgeNode": {
+        name: "KnowledgeNode",
+        child: {},
+        fetch,
+        find,
+        create,
+        init: function () {
+            this.child.parent = this;
+            delete this.init;
+            return this;
+        }
+    }.init(),
+    "KnowledgeNodeStudent": {
+        name: "KnowledgeNodeStudent",
+        child: {},
+        fetch,
+        find,
+        create,
+        init: function () {
+            this.child.parent = this;
+            delete this.init;
+            return this;
+        }
+    }.init(),
+    "KnowledgeNodeContent": {
+        name: "KnowledgeNodeContent",
+        child: {},
+        fetch,
+        find,
+        create,
+        init: function () {
+            this.child.parent = this;
+            delete this.init;
+            return this;
+        }
+    }.init(),
+    "Event": {
+        name: "Event",
+        child: {},
+        fetch,
+        find,
+        create,
+        init: function () {
+            this.child.parent = this;
+            delete this.init;
+            return this;
+        }
+    }.init(),
+    "Session": {
+        name: "Session",
+        child: {},
+        fetch,
+        init: function () {
+            this.child.parent = this;
+            delete this.init;
+            return this;
+        }
+    }.init(),
+    "Content": {
+        name: "Content",
+        child: {},
+        fetch,
+        find,
+        create,
+        init: function () {
+            this.child.parent = this;
+            delete this.init;
+            return this;
+        }
+    }.init(),
+    "Tag": {
+        name: "Tag",
+        child: {},
+        fetch,
+        find,
+        create,
+        init: function () {
+            this.child.parent = this;
+            delete this.init;
+            return this;
+        }
+    }.init(),
+    "GameplayUtil": {
+        name: "GameplayUtil",
+        child: {},
+        util,
+        init: function () {
+            this.child.parent = this;
+            delete this.init;
+            return this;
+        }
+    }.init(),
+    "ReviewUtil": {
+        name: "ReviewUtil",
+        child: {},
+        util,
+        init: function () {
+            this.child.parent = this;
+            delete this.init;
+            return this;
+        }
+    }.init(),
+    "RecommendationUtil": {
+        name: "RecommendationUtil",
+        child: {},
+        util,
+        init: function () {
+            this.child.parent = this;
+            delete this.init;
+            return this;
+        }
+    }.init(),
 
     Student,
     Objective,
@@ -451,7 +475,7 @@ DomoscioJS.AuthorizationToken.request_headers = function(){
     return headers;
 }
 
-function store_credentials(response){
+function store_credentials(response) {
     if (response.getResponseHeader("accesstoken") != null && response.getResponseHeader("refreshtoken") != null) {
         var new_token = {
             'AccessToken': response.getResponseHeader("accesstoken"),
@@ -462,6 +486,9 @@ function store_credentials(response){
             if (domoscio_oauth.AccessToken != new_token.AccessToken || domoscio_oauth.RefreshToken != new_token.AccessToken) {
                 localStorage.setItem("domoscio_oauth", JSON.stringify(new_token));
             }
+        } 
+        else {
+            localStorage.setItem("domoscio_oauth", JSON.stringify(new_token));
         }
     }
 }
