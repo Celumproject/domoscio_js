@@ -421,7 +421,7 @@ DomoscioJS = {
 //#######################################################//
 
 DomoscioJS.AuthorizationToken.get_token = function () {
-    var token = localStorage.getItem("auth_headers");
+    var token = localStorage.getItem("domoscio_oauth");
     if (token == null)
         token = DomoscioJS.configuration.client_passphrase;
     else
@@ -457,10 +457,10 @@ function store_credentials(response){
             'AccessToken': response.getResponseHeader("accesstoken"),
             'RefreshToken': response.getResponseHeader("refreshtoken")
         };
-        if (localStorage.getItem("auth_headers")) {
-            var auth_headers = JSON.parse(localStorage.getItem("auth_headers"));
-            if (auth_headers.AccessToken != new_token.AccessToken || auth_headers.RefreshToken != new_token.AccessToken) {
-                localStorage.setItem("auth_headers", JSON.stringify(new_token));
+        if (localStorage.getItem("domoscio_oauth")) {
+            var domoscio_oauth = JSON.parse(localStorage.getItem("domoscio_oauth"));
+            if (domoscio_oauth.AccessToken != new_token.AccessToken || domoscio_oauth.RefreshToken != new_token.AccessToken) {
+                localStorage.setItem("domoscio_oauth", JSON.stringify(new_token));
             }
         }
     }
