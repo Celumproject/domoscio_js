@@ -453,10 +453,15 @@ DomoscioJS.AuthorizationToken.request_headers = function(){
 
 function store_credentials(response){
     if (response.getResponseHeader("accesstoken") != null && response.getResponseHeader("refreshtoken") != null) {
-        var auth_token = {
+        var new_token = {
             'AccessToken': response.getResponseHeader("accesstoken"),
             'RefreshToken': response.getResponseHeader("refreshtoken")
         };
-        localStorage.setItem("auth_headers", JSON.stringify(auth_token));
+        if (localStorage.getItem("auth_headers")) {
+            var auth_headers = JSON.parse(localStorage.getItem("auth_headers"));
+            if (auth_headers.AccessToken != new_token.AccessToken || auth_headers.RefreshToken != new_token.AccessToken) {
+                localStorage.setItem("auth_headers", JSON.stringify(new_token));
+            }
+        }
     }
 }
