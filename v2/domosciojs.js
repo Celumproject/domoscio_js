@@ -198,7 +198,7 @@ function create(data = {}) {
                     return;
                 }
                 console.log(JSON.stringify(data));
-                result = JSON.parse(e.responseText);
+                e.responseText == "Created" ? result = e.responseText : result = JSON.parse(e.responseText);
             },
             error: function (e, statut) {
                 console.error("We're sorry, but something went wrong. (500)");
